@@ -64,3 +64,10 @@ def customer_cash(customer)
     return customer[:cash]
   end
 end
+
+def remove_customer_cash(customer, cash)
+  for cust in customer
+    customer[:cash] -= cash
+    return customer[:cash]
+  end
+end
