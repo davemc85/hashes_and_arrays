@@ -71,3 +71,9 @@ def remove_customer_cash(customer, cash)
     return customer[:cash]
   end
 end
+
+def customer_pet_count(customer)
+  for customer_pets in customer
+    return customer[:pets].length
+  end
+end
