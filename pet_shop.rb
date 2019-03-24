@@ -98,20 +98,18 @@ end
 def sell_pet_to_customer(shop, pet, customer)
   for pets in shop[:pets]
     if pets[:name] == pet
-      customer[:pets].push(pets)
-      # for customer in customer
       if customer[:cash] > pets[:price]
-        customer[:pets].insert(pet)
-        customer[:pets].push(pets)
 
+        customer[:pets].push(pet)
+        # customer[:pets].insert(pet)
         # customer[:pets] << pets.slice!
 
         increase_pets_sold(shop, 1)
         remove_customer_cash(customer, pets[:price])
         add_or_remove_cash(shop, pets[:price])
       end
-    # end
     end
+    return nil
   end
   return customer[:pets].length
 end
