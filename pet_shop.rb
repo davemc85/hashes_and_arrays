@@ -96,11 +96,10 @@ end
 
 
 def sell_pet_to_customer(shop, pet, customer)
-  for pets in shop[:pets]
-    if pets[:name] == pet
+  find_pet_by_name(shop, name)
       if customer[:cash] > pets[:price]
 
-        customer[:pets].push(pet)
+        customer[:pets].push(pets)
         # customer[:pets].insert(pet)
         # customer[:pets] << pets.slice!
 
@@ -108,25 +107,25 @@ def sell_pet_to_customer(shop, pet, customer)
         remove_customer_cash(customer, pets[:price])
         add_or_remove_cash(shop, pets[:price])
       end
-    end
     return nil
-  end
   return customer[:pets].length
 end
 
-# def sell_pet_to_customer(shop, pet, customer)
-#   for pet in shop[:pets]
-#     if pet[:name] == pet
-#         pet.push(@customer[:pets])
-#         @customers[:pets] << pet[:pets].slice!
-#         @customers[:pets].push(pet[:pets])
-#         pet[:pets].push(@customers[:pets])
-#       if customer[:cash] > pet[:price]
-#       return @customers[:pets].length
-#       # end
-#     end
-#   end
-# end
+
+
+def sell_pet_to_customer(shop, pet, customer)
+  for pet in shop[:pets]
+    if pet[:name] == pet
+      if customer[:cash] > pet[:price]
+        customer[:pets].push(pet)
+        increase_pets_sold(shop, 1)
+        remove_customer_cash(customer, pets[:price])
+        add_or_remove_cash(shop, pets[:price])
+      end
+    end
+  end
+    return shop[:admin][:pets_sold]
+end
 
 # def sell_pet_to_customer(shop, pet, customer)
 #   find_pet_by_name(shop, pet)
